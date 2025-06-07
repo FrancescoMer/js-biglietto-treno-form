@@ -1,14 +1,21 @@
-const pricePerKm = 0.21;
 
-const km = parseFloat(prompt("Quanti chilometri vuoi percorrere?"));
-const age = parseInt(prompt("Quanti anni hai?"));
 
-let price = km * pricePerKm;
+const form = document.getElementById("ticket-form");
+const result = document.getElementById("result");
 
-if (age < 18) {
-  price *= 0.8; 
-} else if (age > 65) {
-  price *= 0.6; 
-}
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
 
-console.log("Il prezzo del tuo biglietto è: €" + price.toFixed(2));
+  const km = parseFloat(document.getElementById("km").value);
+  const age = parseInt(document.getElementById("age").value);
+  const pricePerKm = 0.21;
+  let price = km * pricePerKm;
+
+  if (age < 18) {
+    price *= 0.8; // sconto 20%
+  } else if (age > 65) {
+    price *= 0.6; // sconto 40%
+  }
+
+  result.textContent = `Prezzo del biglietto: €${price.toFixed(2)}`;
+});
