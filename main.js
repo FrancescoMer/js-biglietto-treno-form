@@ -1,22 +1,31 @@
-
-
-
-const form = document.getElementById("ticket-form");
-const result = document.getElementById("result");
-
-form.addEventListener("submit", function(event) {
+document.getElementById('ticket-form').addEventListener('submit', function(event) {
   event.preventDefault();
 
-  const km = parseFloat(document.getElementById("km").value);
-  const age = parseInt(document.getElementById("age").value);
+  const name = document.getElementById('name').value.trim();
+  const km = parseFloat(document.getElementById('km').value);
+  const ageGroup = document.getElementById('age').value;
+
   const pricePerKm = 0.21;
   let price = km * pricePerKm;
+  let offer = 'Biglietto Standard';
 
-  if (age < 18) {
-    price *= 0.8; // sconto 20%
-  } else if (age > 65) {
-    price *= 0.6; // sconto 40%
+  if (ageGroup === 'minorenne') {
+    price *= 0.8;
+    offer = 'Biglietto Young';
+  } else if (ageGroup === 'over65') {
+    price *= 0.6;
+    offer = 'Biglietto Senior';
   }
 
-  result.textContent = `Prezzo del biglietto: €${price.toFixed(2)}`;
+  const coach = Math.floor(Math.random() * 10) + 1;
+  const cpCode = Math.floor(10000 + Math.random() * 90000);
+
+  // Inserisci i dati nella tabella
+  document.getElementById('passenger-name').textContent = name;
+  document.getElementById('ticket-type').textContent = offer;
+  document.getElementById('coach').textContent = coach;
+  document.getElementById('cp-code').textContent = cpCode;
+  document.getElementById('ticket-price').textContent = price.toFixed(2) + '€';
+
+  document.getElementById('ticket-output').classList.remove('hidden');
 });
