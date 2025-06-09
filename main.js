@@ -1,5 +1,6 @@
 
 
+
 const form = document.getElementById("ticket-form");
 const result = document.getElementById("result");
 
